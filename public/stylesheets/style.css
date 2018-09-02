@@ -1,0 +1,154 @@
+#Bienvenue {
+
+  color: cyan;
+  background-color: FireBrick;
+  border: 1px solid black;
+  height: 100px;
+  font-size: 40px;
+  padding-top: 23px;
+}
+
+#citation {
+
+	font-size: 20px;
+	padding-top: 23px;
+	padding-left: 1100px;
+}
+
+#Inscrip {
+	
+  color: greenyellow;
+  text-decoration: underline;
+  margin-top: 0px;
+  margin-left: 100px; 
+  font-size: 30px;
+}
+
+#body2 {
+
+	background: url(https://www.jiovanni.fr/wp-content/uploads/2016/02/cave-a-vin-6.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#firstname, #lastname {
+
+	color: Lime;
+	font-size: 30px;
+	margin-left: 200px;
+}
+
+#firstname2, #lastname2 {
+
+	display: block;
+	width: 200px;
+	height: 30px;
+	margin-left: 200px;
+}
+
+#bouton {
+
+	margin-left: 550px;
+	height: 50px;
+	width: 100px;
+}
+
+/*------------------------------------------page 2---------------------------------------*/
+
+
+
+#ListeVins {
+
+	background: url(https://media.istockphoto.com/vectors/seamless-texture-with-vines-vector-id490584396);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#form {
+
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#titre {
+
+	font-size: 100px;
+	color: orange;
+}
+
+#Bouteille1 {
+
+	margin-left: 500px;
+	display: block;
+	width: 200px;
+	height: 30px;
+}
+
+#Annee1, #Pays1, #Prix1 {
+
+	margin-left: 10px;
+	display: block;
+	width: 200px;
+	height: 30px;
+}
+
+#Bouteille {
+
+	margin-left: 500px;
+	color: #ff00ff;
+}
+
+#Annee, #Pays, #Prix, #Retirer{
+
+	margin-left: 10px;
+	color: #ff00ff;
+}
+
+#bouton1 {
+
+	display: block;
+}
+
+
+#ajout {
+
+	font-size: 60px;
+}
+
+#Modification {
+
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#Bouteille2 {
+
+	margin-left: 400px;
+	color: #ff00ff;
+}
+
+#bouton1 {
+
+	margin-top: 10px;
+}
+
+#bouton3 {
+
+	margin-top: 10px;
+}
+
+#Annee2, #Pays2, #Prix2, #Modifier{
+
+	margin-left: 10px;
+	color: #ff00ff;
+}
+
+#modif {
+
+	font-size: 30px;
+}
+
+#add {
+
+	font-size: 30px;
+}

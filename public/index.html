@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="icon" type="image/png" href="https://images.encyclopediadramatica.rs/thumb/9/9c/Trollface_clean.png/200px-Trollface_clean.png">
+	<title>McCellar P2</title>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+
+<body id = "body2">
+
+	<main id="page">	 
+
+	<section id="Accueil" v-if = "currentPage === 'Accueil'">
+  	
+  		<nav>
+			<li v-on:click = "currentPage = 'Accueil'">Accueil</li>
+			<li v-on:click = "currentPage = 'ListeVins'">Liste de vins</li>
+		</nav>
+
+	    <h1 id="Bienvenue">
+    		<center>Bienvenue sur la cave à vins en ligne !
+				<br> 
+					<div id = "citation"> “Il y a plus de philosophie dans une bouteille de vin que dans tous les livres.” Alfred Capus. </div>
+				</br>
+			</center>
+		</h1>
+
+	    <p id="Inscrip">Inscription: </p>
+
+    	<form action="#">
+    		<div>
+        		<label id="firstname" for="firstname">Prénom :</label>
+        		<input type="text" id="firstname2" name="user_firstname">
+    		</div>
+    		<div>
+        		<label id="lastname" for="lastname">Nom :</label>
+        		<input type="text" id="lastname2" name="user_lastname">
+        	
+	        	<button id="bouton" v-on:click = "currentPage = 'ListeVins'">
+	        		<strong>Entrer</strong>
+	        	</button>
+    		</div>
+    	</form>
+		
+	</section>
+
+	<section id="ListeVins" v-else-if="currentPage === 'ListeVins'">
+
+		<nav>
+			<li v-on:click = "currentPage = 'Accueil'">Accueil</li>
+			<li v-on:click = "currentPage = 'ListeVins'">Liste de vins</li>
+		</nav>
+
+		<div id="add"><strong><center>
+			Ajouter un vin
+		</div></strong></center>
+
+		<strong>
+			<form id = "form" action="/identification" method="post">
+	        	<label id="Bouteille" for="Bouteille">Bouteille :</label>
+	        	<input type="text" v-model="bouteille" id="bouteille1">
+
+	        	<label id="Annee" for="Annee">Année :</label>
+	        	<input type="number" v-model="annee" id="annee1">
+
+	        	<label id="Pays" for="Pays">Pays :</label>
+	        	<input type="text" v-model="pays" id="pays1">
+
+	        	<label id="Prix" for="Prix">Prix :</label>
+	        	<input type="number" v-model="prix" id="prix1">
+
+	    	</form>
+		</strong>
+
+		<br><center>
+        	<button id="bouton1" v-on:click = "ajoutListe()"> Entrer </button>
+    	</center></br>
+
+    	<div id="modif"><strong><center>
+			Modifier un vin
+		</div></strong></center>
+
+    	<strong>
+    		<form id= "Modification">
+    			<label id="Bouteille2" for="Bouteille2">Bouteille :</label>
+	        	<input type="text" v-model="bouteille3" id="bouteille3">
+
+	        	<label id="Annee2" for="Annee2">Année :</label>
+	       		<input type="number" v-model="annee3" id="annee3">
+
+	        	<label id="Pays2" for="Pays2">Pays :</label>
+	       		<input type="text" v-model="pays3" id="pays3">
+
+	        	<label id="Prix2" for="Prix2">Prix :</label>
+	        	<input type="number" v-model="prix3" id="prix3">
+
+    			<label id="Modifier" for="Modifier">Numéro :</label>
+    			<input type="number" v-model="modifier" id="modifier">
+
+    		</form>
+
+    		<br><center>
+    		<button id="bouton3" v-on:click = "modifElem()">Modifier</button>
+    		</center></br>
+
+    	</strong>
+
+    	<br>
+		</br>
+
+		<center>
+			<div id = "titre"> Votre liste de vins </div>	
+			
+			<div id= "page">	
+				<ul>
+					<li v-for = "vin in vins">
+						{{vins.indexOf(vin)+1}})
+						{{vin.Bouteille}},
+						{{vin.Annee}},
+						{{vin.Pays}},
+						{{vin.Prix}}	
+					</li>
+				</ul>
+			</div>
+		</center>
+
+		<center><strong>
+    		<div>
+    			<label id="Retirer" for="Retirer">Numéro :</label>
+    			<input type="number" v-model="retirer" id="retirer">
+    			<button id="button2" v-on:click = "deleteElem()">Finish Him!</button>
+    		</div>
+    	</center></strong>
+
+	</section>
+
+	</main>
+
+	<script>
+		Vue.prototype.$http = axios
+
+		var page = new Vue ({
+			el: '#page',
+			data: {
+				currentPage: 'Accueil',
+				filter:'',
+				menu: '',
+				vins: [],
+				bouteille: '',
+				annee: '',
+				pays: '',
+				prix: '',
+				retirer: '',
+				modifier: '',
+				bouteille3: '',
+				annee3: '',
+				pays3: '',
+				prix3: ''
+			},
+
+			created () {
+
+    			this.$http.get('/list')
+
+    			.then(list => {
+       				console.log('affichage de ma liste', list)
+        			this.vins = list.data
+      			})
+
+      			.catch(err => {
+        			console.log('error', err)
+     		 	})
+ 			},
+
+			methods: {
+
+				ajoutListe() {
+					this.$http.post('/list', {Bouteille: this.bouteille, Annee: this.annee,Pays: this.pays, Prix: this.prix + ' €'})
+
+					.then(() => {
+						this.vins.push({Bouteille: this.bouteille, Annee: this.annee, Pays: this.pays, Prix: this.prix + ' €'})
+					})
+				},
+
+				deleteElem() {
+					if (document.getElementById('retirer').value !== ""){
+						this.vins.splice(document.getElementById('retirer').value - 1,1)
+					}
+				},
+
+				modifElem() {
+					if (document.getElementById('bouteille3').value !== "" && document.getElementById('annee3').value !== null && document.getElementById('pays3').value !== ""  && document.getElementById('prix3').value !== null && document.getElementById('modifier').value !== ""){
+						this.vins[document.getElementById('modifier').value -1].Bouteille = document.getElementById('bouteille3').value
+						this.vins[document.getElementById('modifier').value -1].Annee = document.getElementById('annee3').value
+						this.vins[document.getElementById('modifier').value -1].Pays = document.getElementById('pays3').value
+						this.vins[document.getElementById('modifier').value -1].Prix = document.getElementById('prix3').value
+					}
+				}
+			}
+		})
+	</script>
+
+</body>
+</html>
