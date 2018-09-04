@@ -85,7 +85,7 @@
 		</div></strong></center>
 
     	<strong>
-    		<form id= "Modification">
+    		<form id= "Modification" action="/identification">
     			<label id="Bouteille2" for="Bouteille2">Bouteille :</label>
 	        	<input type="text" v-model="bouteille3" id="bouteille3">
 
@@ -129,11 +129,11 @@
 		</center>
 
 		<center><strong>
-    		<div>
+    		<form method="post">
     			<label id="Retirer" for="Retirer">Numéro :</label>
     			<input type="number" v-model="retirer" id="retirer">
-    			<button id="button2" v-on:click = "deleteElem()">Finish Him!</button>
-    		</div>
+    		</form>
+    		<button id="button2" v-on:click = "deleteElem()">Finish Him!</button>
     	</center></strong>
 
 	</section>
@@ -179,7 +179,7 @@
 			methods: {
 
 				ajoutListe() {
-					this.$http.post('/list', {Bouteille: this.bouteille, Annee: this.annee,Pays: this.pays, Prix: this.prix + ' €'})
+					this.$http.post('/list', {Bouteille: this.bouteille, Annee: this.annee, Pays: this.pays, Prix: this.prix + ' €'})
 
 					.then(() => {
 						this.vins.push({Bouteille: this.bouteille, Annee: this.annee, Pays: this.pays, Prix: this.prix + ' €'})
@@ -187,18 +187,30 @@
 				},
 
 				deleteElem() {
-					if (document.getElementById('retirer').value !== ""){
-						this.vins.splice(document.getElementById('retirer').value - 1,1)
-					}
+					this.$http.post('/list', {Retirer: this.retirer})
+
+					.then(() => {
+						this.vins.splice(this.retirer - 1,1)
+					})
 				},
 
 				modifElem() {
-					if (document.getElementById('bouteille3').value !== "" && document.getElementById('annee3').value !== null && document.getElementById('pays3').value !== ""  && document.getElementById('prix3').value !== null && document.getElementById('modifier').value !== ""){
-						this.vins[document.getElementById('modifier').value -1].Bouteille = document.getElementById('bouteille3').value
-						this.vins[document.getElementById('modifier').value -1].Annee = document.getElementById('annee3').value
-						this.vins[document.getElementById('modifier').value -1].Pays = document.getElementById('pays3').value
-						this.vins[document.getElementById('modifier').value -1].Prix = document.getElementById('prix3').value
-					}
+					this.$http.post('/list', {Bouteille: this.bouteille3, Annee: this.annee3, Pays: this.pays3, Prix: this.prix3, Modifier: this.modifier})
+
+					.then(() => {
+						if (this.bouteille3 !== ''){
+							this.vins[this.modifier - 1].Bouteille = this.bouteille3;
+						}
+						if (this.annee3 !== ""){
+							this.vins[this.modifier - 1].Annee = this.annee3;
+						}
+						if (this.pays3 !== ''){
+							this.vins[this.modifier - 1].Pays = this.pays3;
+						}
+						if (this.prix3 !== ""){
+							this.vins[this.modifier - 1].Prix = this.prix3 + '€';
+						}
+					})
 				}
 			}
 		})
