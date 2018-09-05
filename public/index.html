@@ -14,12 +14,13 @@
 
 	<main id="page">	 
 
+		
+	<!-- Première page -->
+		
 	<section id="Accueil" v-if = "currentPage === 'Accueil'">
-  	
-  		<nav>
-			<li v-on:click = "currentPage = 'Accueil'">Accueil</li>
-			<li v-on:click = "currentPage = 'ListeVins'">Liste de vins</li>
-		</nav>
+
+		
+  		<!-- Présentation de la page d'accueil -->
 
 	    <h1 id="Bienvenue">
     		<center>Bienvenue sur la cave à vins en ligne !
@@ -48,15 +49,31 @@
 		
 	</section>
 
+	
+	<!-- Second page -->
+	
 	<section id="ListeVins" v-else-if="currentPage === 'ListeVins'">
 
-		<nav>
-			<li v-on:click = "currentPage = 'Accueil'">Accueil</li>
-			<li v-on:click = "currentPage = 'ListeVins'">Liste de vins</li>
-		</nav>
+		
+		<!-- Navigation -->
+		
+		<nav><center><br>
+			<li v-on:click = "currentPage = 'Accueil'" id="presentation">Revenir à → Accueil ← </li>
+			<li v-on:click = "currentPage = 'ChuckNorris'" id = "presentation"> → L'équipe des Admins ← </li>
+		</nav></center></br>
+
+
+		<!-- Présentation de la page des vins -->
+
+		<center>
+			<div id = "titre1">Bienvenue dans l'espace client</div>
+		</center>
+
+
+		<!-- Bouton pour ajouter un vin -->
 
 		<div id="add"><strong><center>
-			Ajouter un vin
+			→ Ajouter un vin ←
 		</div></strong></center>
 
 		<strong>
@@ -78,43 +95,49 @@
 
 		<br><center>
         	<button id="bouton1" v-on:click = "ajoutListe()"> Entrer </button>
-    	</center></br>
-
-    	<div id="modif"><strong><center>
-			Modifier un vin
-		</div></strong></center>
-
-    	<strong>
-    		<form id= "Modification" action="/identification">
-    			<label id="Bouteille2" for="Bouteille2">Bouteille :</label>
-	        	<input type="text" v-model="bouteille3" id="bouteille3">
-
-	        	<label id="Annee2" for="Annee2">Année :</label>
-	       		<input type="number" v-model="annee3" id="annee3">
-
-	        	<label id="Pays2" for="Pays2">Pays :</label>
-	       		<input type="text" v-model="pays3" id="pays3">
-
-	        	<label id="Prix2" for="Prix2">Prix :</label>
-	        	<input type="number" v-model="prix3" id="prix3">
-
-    			<label id="Modifier" for="Modifier">Numéro :</label>
-    			<input type="number" v-model="modifier" id="modifier">
-
-    		</form>
-
-    		<br><center>
-    		<button id="bouton3" v-on:click = "modifElem()">Modifier</button>
     		</center></br>
 
-    	</strong>
+	
+		<!-- Bouton pour modifier un vin -->
+	
+    		<div id="modif"><strong><center>
+			→ Modifier un vin ←
+		</div></strong></center>
 
-    	<br>
+		<strong>
+			<form id= "Modification" action="/identification">
+				<label id="Bouteille2" for="Bouteille2">Bouteille :</label>
+				<input type="text" v-model="bouteille3" id="bouteille3">
+
+				<label id="Annee2" for="Annee2">Année :</label>
+				<input type="number" v-model="annee3" id="annee3">
+
+				<label id="Pays2" for="Pays2">Pays :</label>
+				<input type="text" v-model="pays3" id="pays3">
+
+				<label id="Prix2" for="Prix2">Prix :</label>
+				<input type="number" v-model="prix3" id="prix3">
+
+				<label id="Modifier" for="Modifier">Numéro :</label>
+				<input type="number" v-model="modifier" id="modifier">
+
+			</form>
+
+			<br><center>
+			<button id="bouton3" v-on:click = "modifElem()">Modifier</button>
+			</center></br>
+
+		</strong>
+
+		<br>
 		</br>
 
+
+		<!-- Liste des vins -->
+		
 		<center>
-			<div id = "titre"> Votre liste de vins </div>	
-			
+			<div id = "titre2"> Votre liste de vins </div>	
+
 			<div id= "page">	
 				<ul>
 					<li v-for = "vin in vins">
@@ -128,17 +151,52 @@
 			</div>
 		</center>
 
+	
+	<!-- Bouton pour supprimer un vin -->
+
 		<center><strong>
-    		<form method="post">
-    			<label id="Retirer" for="Retirer">Numéro :</label>
-    			<input type="number" v-model="retirer" id="retirer">
-    		</form>
-    		<button id="button2" v-on:click = "deleteElem()">Finish Him!</button>
-    	</center></strong>
+		<form method="post">
+			<label id="Retirer" for="Retirer">Numéro :</label>
+			<input type="number" v-model="retirer" id="retirer">
+		</form>
+			<button id="button2" v-on:click = "deleteElem()">Finish Him!</button>
+		</center></strong>
+
+	</section>
+
+
+	<!-- Troisième page -->
+
+	<section id="ChuckNorris" v-else-if="currentPage === 'ChuckNorris'">
+
+
+		<!-- Navigation -->
+
+		<nav><center><br>
+			<li v-on:click = "currentPage = 'Accueil'" id="presentation">Revenir à → Accueil ← </li>
+			<li v-on:click = "currentPage = 'ListeVins'" id="presentation">Revenir à → Liste de vins ← </li>
+		</nav></center></br>
+
+		
+		<!-- Page -->
+
+		<center>
+			<div id = "titre1">L'équipe des Admins: </div>
+			
+		<br></br>
+
+			<div id="absent">L'absentéiste</div>
+			
+			<div id="touriste">Le touriste</div>
+				
+		</center>
 
 	</section>
 
 	</main>
+
+
+	<!-- Partie scripts // boutons -->
 
 	<script>
 		Vue.prototype.$http = axios
@@ -154,12 +212,14 @@
 				annee: '',
 				pays: '',
 				prix: '',
+				quantite: '',
 				retirer: '',
 				modifier: '',
 				bouteille3: '',
 				annee3: '',
 				pays3: '',
-				prix3: ''
+				prix3: '',
+				quantite3: ''
 			},
 
 			created () {
@@ -179,10 +239,10 @@
 			methods: {
 
 				ajoutListe() {
-					this.$http.post('/list', {Bouteille: this.bouteille, Annee: this.annee, Pays: this.pays, Prix: this.prix + ' €'})
+					this.$http.post('/list', {Bouteille: this.bouteille, Annee: this.annee, Pays: this.pays, Prix: this.prix + ' €', Quantite: 'Quantité: ' + this.quantite})
 
 					.then(() => {
-						this.vins.push({Bouteille: this.bouteille, Annee: this.annee, Pays: this.pays, Prix: this.prix + ' €'})
+						this.vins.push({Bouteille: this.bouteille, Annee: this.annee, Pays: this.pays, Prix: this.prix + ' €', Quantite: 'Quantité: ' + this.quantite})
 					})
 				},
 
@@ -190,12 +250,12 @@
 					this.$http.post('/list', {Retirer: this.retirer})
 
 					.then(() => {
-						this.vins.splice(this.retirer - 1,1)
+						this.vins.splice(this.retirer - 1, 1)
 					})
 				},
 
 				modifElem() {
-					this.$http.post('/list', {Bouteille: this.bouteille3, Annee: this.annee3, Pays: this.pays3, Prix: this.prix3, Modifier: this.modifier})
+					this.$http.post('/list', {Bouteille: this.bouteille3, Annee: this.annee3, Pays: this.pays3, Prix: this.prix3, Quantite: this.quantite3, Modifier: this.modifier})
 
 					.then(() => {
 						if (this.bouteille3 !== ''){
@@ -209,6 +269,9 @@
 						}
 						if (this.prix3 !== ""){
 							this.vins[this.modifier - 1].Prix = this.prix3 + '€';
+						}
+						if (this.quantite3 !== "") {
+							this.vins[this.modifier - 1].Quantite = 'Quantité: '+ this.quantite3;
 						}
 					})
 				}
