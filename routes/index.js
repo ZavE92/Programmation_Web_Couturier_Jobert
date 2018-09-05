@@ -29,6 +29,9 @@ router.post('/list', (req, res) => {
 		if (req.body.Prix !== ""){
 			list[req.body.Modifier - 1].Prix = req.body.Prix + '€';
 		}
+		if (req.body.Quantite !== ""){
+			list[req.body.Modifier - 1].Quantite = 'Quantité: ' + req.body.Quantite;
+		}
 		res.send('OK')
   	}
 
@@ -37,7 +40,8 @@ router.post('/list', (req, res) => {
 			Bouteille: req.body.Bouteille,
 			Annee: req.body.Annee,
 			Pays: req.body.Pays,
-			Prix: req.body.Prix
+			Prix: req.body.Prix,
+			Quantite: req.body.Quantite
 			})
 		res.send('OK')
 	}
